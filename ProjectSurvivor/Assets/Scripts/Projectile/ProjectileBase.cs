@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileBase : MonoBehaviour
@@ -6,11 +5,13 @@ public class ProjectileBase : MonoBehaviour
     [SerializeField]
     protected float speed;
     [Space(10)]
+    
     [Header("KNOCKBACK")]
     [SerializeField]
     private float knockBackCooldown = 1f;
     [SerializeField]
     protected float knockBackForce = 2f;
+    
     [Space(10)]
     [Header("HIT DETECTION")]
     [SerializeField]
@@ -20,34 +21,34 @@ public class ProjectileBase : MonoBehaviour
     [SerializeField]
     protected float hitDetectRadius = 0.4f;
 
-    protected Health damagedEnemy;
-    protected WeaponDataSO weaponData;
+    protected IDamageable p_damagedTarget;
+    protected AbilityDataSO p_weaponData;
 
-    protected int damage;
-    protected float effectApplyCDTimer;
-    protected float knockBackCDTimer;
-    protected Vector3 moveDirection;
-    protected bool hitDetected;
+    protected int p_damage;
+    protected float p_effectApplyCDTimer;
+    protected float p_knockBackCDTimer;
+    protected Vector3 p_moveDirection;
+    protected bool p_hitDetected;
 
     public float Speed => speed;
 
     private void Update()
     {
-        knockBackCDTimer -= Time.deltaTime;
+        p_knockBackCDTimer -= Time.deltaTime;
     }
 
     public void SetUp(float speed, int damage)
     {
         this.speed = speed;
-        this.damage = damage;
+        this.p_damage = damage;
     }
 
-    public void SetUp(float speed, Vector3 moveDirection, int damage, WeaponDataSO weaponData)
+    public void SetUp(float speed, Vector3 moveDirection, int damage, AbilityDataSO weaponData)
     {
         this.speed = speed;
-        this.moveDirection = moveDirection;
-        this.damage = damage;
-        this.weaponData = weaponData;
+        this.p_moveDirection = moveDirection;
+        this.p_damage = damage;
+        this.p_weaponData = weaponData;
     }
 
 
@@ -56,15 +57,18 @@ public class ProjectileBase : MonoBehaviour
 
     protected void DamageAnEnemyOneTime(Collider other)
     {
-        Health health = other.GetComponent<Health>();
+        IDamageable damageable = other.GetComponent<IDamageable>();
 
-        if (health && !health.isPlayer)
+        if (damageable != null)
         {
-            if (health != damagedEnemy)
+            if (damageable != p_damagedTarget)
             {
-                health.TakeDamage(damage);
-                damagedEnemy = health;
-                
+                p_damage = Damage(p_damage, ref isHitCritical);
+
+                damageable.TakeDamage(p_damage, isHitCritical, false);
+                p_damagedTarget = damageable;
+
+                DamagePopup(other);
                 ApplyEffect(other);
                 KnockBack(other);
             }
@@ -73,14 +77,14 @@ public class ProjectileBase : MonoBehaviour
 
     protected void ApplyEffect(Collider other)
     {
-        if (!weaponData.effect) return;
+        if (!p_weaponData.effect) return;
         
         int chanceToApplyEffect = Random.Range(0, 100);
 
-        if (chanceToApplyEffect < weaponData.chanceToApplyEffect)
+        if (chanceToApplyEffect < p_weaponData.chanceToApplyEffect)
         {
             EffectManager target = other.GetComponent<EffectManager>();
-            Effect effect = target.AddEffect(weaponData.effect);
+            Effect effect = target.AddEffect(p_weaponData.effect);
             effect.SetTarget(other.GetComponent <Enemy>());
             effect.Enable();
         }
@@ -88,21 +92,45 @@ public class ProjectileBase : MonoBehaviour
 
     public void KnockBack(Collider collider)
     {
-        if (knockBackCDTimer > 0f) return;
+        if (p_knockBackCDTimer > 0f) return;
 
         KnockBackController knockBackController = collider.GetComponent<KnockBackController>();
 
         if (knockBackController)
         {
             knockBackController.KnockBack(transform, knockBackForce);
-            knockBackCDTimer = knockBackCooldown;
+            p_knockBackCDTimer = knockBackCooldown;
+        }
+    }
+
+    protected bool isHitCritical;
+    protected int Damage(int damage, ref bool isHitCritical)
+    {
+        p_damage = StatsManager.Instance.GetStrengthStat.DamageWithStrengthStat(damage);
+        
+        isHitCritical = StatsManager.Instance.GetCriticalHitChanceStat.IsHitCritical();
+
+        if (isHitCritical)
+        {
+            p_damage = StatsManager.Instance.GetCriticalHitDamageStat.CriticalDamage(p_damage);
+        }
+
+        return p_damage;
+    }
+
+    protected void DamagePopup(Collider other){
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy){
+            //Create damage popup
+            GameManager.Instance.CreateDamagePopup(enemy.GetDamagePopupSpawnTransform.position, 
+            p_damage, isHitCritical, false);
         }
     }
 
     protected void DisableProjectile()
     {
         gameObject.SetActive(false);
-        damagedEnemy = null;
+        p_damagedTarget = null;
     }
 
     private void OnDrawGizmosSelected()

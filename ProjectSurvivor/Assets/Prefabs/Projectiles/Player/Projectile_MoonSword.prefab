@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 258770235390611165}
   - component: {fileID: 972965308}
   - component: {fileID: 4008895103034732371}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Projectile_MoonSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   knockBackCooldown: 1
-  knockBackForce: 100
+  knockBackForce: 0
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -172,6 +172,8 @@ MonoBehaviour:
   rotateAroundPlayer: 0
   lifeTime: 5
   damageCooldownTime: 0.4
+  collectiveEffectApplyTime: 0.5
+  destroyOnLifeTimeEnd: 0
 --- !u!65 &4008895103034732371
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c56abd396fd0cf4e97011489c1367c6, type: 3}
+  m_Name: UpgradeData_DamageUpgrade_MoonSwords
+  m_EditorClassIdentifier: 
+  upgradeType: 3
+  upgradeName: Moon Swords
+  upgradeIcon: {fileID: 21300000, guid: 917871e5c6d34ed4b93dfafad1277db5, type: 3}
+  abilityData: {fileID: 11400000, guid: ad57ba17f38f0db4db563ee6ecd0409c, type: 2}
+  abilityUpgrade: {fileID: 11400000, guid: 4115531eed3a2f54395c23fe8bb3586a, type: 2}
+  statConfig: {fileID: 0}
+  upgradeValue: 0

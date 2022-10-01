@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
 public class AttackTrigger : MonoBehaviour
 {
     private Collider m_collider;

@@ -5,11 +5,21 @@ using UnityEngine;
 public class DamagePopup : MonoBehaviour
 {
     [SerializeField] 
-    private TextMeshProUGUI damageText;
+    private TextMeshPro damageText;
     [SerializeField]
     private float lifeTime;
     [SerializeField]
-    private Color textColor;
+    private Color normalDamageTextColor;
+    [SerializeField]
+    private float normalDamageTextFontSize = 18f;
+    [SerializeField]
+    private Color criticalDamageTextColor;
+    [SerializeField]
+    private float criticalDamageTextFontSize = 24f;
+    [SerializeField]
+    private Color damageOvertimeTextColor;
+    [SerializeField]
+    private float damageOvertimeextFontSize = 12f;
 
     [Header("TWEENING VALUES")]
     [SerializeField]
@@ -19,17 +29,39 @@ public class DamagePopup : MonoBehaviour
     [SerializeField]
     private float scaleDuration;
 
-    private float m_lifeTimer;
+    private float _lifeTimer;
+
+    private static int _sortingOder;
 
     private void OnEnable()
     {
-        m_lifeTimer = lifeTime; 
+        _lifeTimer = lifeTime; 
     }
 
-    public void Setup(int damageAmount)
+    public void Setup(int damageAmount, bool isCritical, bool isDamageOverTime)
     {
         damageText.SetText(damageAmount.ToString());
-        damageText.color = new Color(textColor.r, textColor.g, textColor.b, 0f);
+        
+        if (isCritical)
+        {
+            damageText.color = criticalDamageTextColor;
+            damageText.fontSize = criticalDamageTextFontSize;
+        }
+        else if (isDamageOverTime)
+        {
+            damageText.color = damageOvertimeTextColor;
+            damageText.fontSize = damageOvertimeextFontSize;
+        }
+        else
+        {
+            damageText.color = normalDamageTextColor;
+            damageText.fontSize = normalDamageTextFontSize;
+        }
+
+        damageText.color = new Color(damageText.color.r, damageText.color.g, damageText.color.b, 0f);
+        
+        _sortingOder++;
+        damageText.sortingOrder = _sortingOder;
 
         Sequence sequence = DOTween.Sequence();
         sequence.Append(transform.DOMove(transform.position + moveVector, moveDuration, false));
@@ -40,8 +72,8 @@ public class DamagePopup : MonoBehaviour
 
     private void Update()
     {
-        m_lifeTimer -= Time.deltaTime;
-        if (m_lifeTimer <= 0f)
+        _lifeTimer -= Time.deltaTime;
+        if (_lifeTimer <= 0f)
         {
             gameObject.SetActive(false);
         }

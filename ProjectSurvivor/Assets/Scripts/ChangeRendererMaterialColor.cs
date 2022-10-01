@@ -9,12 +9,19 @@ public class ChangeRendererMaterialColor : MonoBehaviour
     [SerializeField]
     private Color hdrColor = Color.white;
 
-    private void Start()
+    private Material m_material;
+
+    private void Awake() 
     {
         if (!myRenderer)
         {
             myRenderer = GetComponent<Renderer>();
         }
+    }
+
+    private void Start()
+    {
+        m_material = myRenderer.material;
 
         ChangeColors();
     }
@@ -23,7 +30,7 @@ public class ChangeRendererMaterialColor : MonoBehaviour
     {
         if (useEmission)
         {
-            myRenderer.material.SetColor("_EmissionColor", hdrColor);
+            m_material.SetColor("_EmissionColor", hdrColor);
         }
     }
 }

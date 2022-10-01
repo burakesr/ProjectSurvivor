@@ -24,6 +24,14 @@ public class HealthBarUI : MonoBehaviour
         GameManager.Instance.GetPlayer().GetHealth.OnHeal -= RefreshHealthBar;
     }
 
+    private void RefreshHealthBar(int amount, bool isCritical, bool isDamageOverTime)
+    {
+        Health health = GameManager.Instance.GetPlayer().GetHealth;
+
+        healthText.text = health.GetCurrentHealth.ToString() + "/" + health.GetMaxHealth.ToString();
+        fillImage.fillAmount = health.GetHealthFraction();
+    }
+
     private void RefreshHealthBar(int amount)
     {
         Health health = GameManager.Instance.GetPlayer().GetHealth;

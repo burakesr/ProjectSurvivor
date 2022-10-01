@@ -18,7 +18,7 @@ MonoBehaviour:
   acceleration: 50
   stoppingDistance: 1
   autoBraking: 1
-  maxHealth: 10
+  maxHealth: 35
   contactDamage: 5
   attackDamage: 10
   attackInterval: 5

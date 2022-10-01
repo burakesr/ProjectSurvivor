@@ -32,15 +32,23 @@ public class UpgradesManager : MonoBehaviour
 
         switch (upgradeData.upgradeType)
         {
-            case UpgradeType.WeaponUpgrade:
+            case UpgradeType.AbilityUpgrade:
+
                 upgradeData.Upgrade();
-                AddUpgradeToAvailabeUpgradesList(upgradeData.weaponData.UpgradeByLevel(upgradeData.weaponData.WeaponInstance.GetCurrentLevel));
+
+                AbilityBase abilityInstance = upgradeData.abilityData.AbilityInstance;
+                
+                if (abilityInstance.GetCurrentLevel < abilityInstance.GetMaxLevel)
+                {
+                    AddUpgradeToAvailabeUpgradesList(upgradeData.abilityData.UpgradeByLevel(upgradeData.abilityData.AbilityInstance.GetCurrentLevel));
+                }
+
                 break;
             case UpgradeType.ItemUpgrade:
                 upgradeData.UpgradeStat();
                 break;
-            case UpgradeType.WeaponUnlock:
-                player.GetWeaponsManager.AddWeapon(upgradeData.weaponData);
+            case UpgradeType.AbilityUnlock:
+                player.GetAbilityManager.AddAbility(upgradeData.abilityData);
                 break;
             case UpgradeType.ItemUnlock:
                 break;
@@ -75,6 +83,8 @@ public class UpgradesManager : MonoBehaviour
             {
                 // Remove selected upgrade from upgrades list
                 upgrades.Remove(selectedUpgrade);
+
+                if (upgrades.Count == 0) break;
 
                 // Select random number without selected upgrade in the upgrades list
                 random = Random.Range(0, upgrades.Count);

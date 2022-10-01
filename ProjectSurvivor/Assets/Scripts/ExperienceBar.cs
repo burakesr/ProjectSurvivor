@@ -15,17 +15,14 @@ public class ExperienceBar : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.GetPlayer().GetLevelManager.levelData.OnExperienceGained += RefreshExperienceBar;
+
         RefreshExperienceBar();
     }
-
-    private void OnEnable()
-    {
-        GameManager.Instance.GetPlayer().GetLevelManager.levelData.OnExperienceGained += RefreshExperienceBar;
-    }
-
+    
     private void OnDisable()
     {
-        GameManager.Instance.GetPlayer().GetLevelManager.levelData.OnExperienceGained += RefreshExperienceBar;
+        GameManager.Instance.GetPlayer().GetLevelManager.levelData.OnExperienceGained -= RefreshExperienceBar;
     }
 
     private void RefreshExperienceBar()

@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPickedUpSFX: {fileID: 11400000, guid: ec04621e5b38782428e7185ba18db943, type: 2}
-  experienceAmount: 750
+  experienceAmount: 500
 --- !u!114 &-8214305875461072169
 MonoBehaviour:
   m_ObjectHideFlags: 0

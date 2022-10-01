@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(LevelDataSO))]
+[CustomEditor(typeof(CharacterLevelDataSO))]
 public class LevelDataEditor : Editor
 {
     Vector2 scroll;
@@ -12,7 +12,7 @@ public class LevelDataEditor : Editor
 
         EditorGUILayout.Space();
 
-        LevelDataSO levelData = (LevelDataSO)target;
+        CharacterLevelDataSO levelData = (CharacterLevelDataSO)target;
 
         scroll = EditorGUILayout.BeginScrollView(scroll, GUILayout.MaxHeight(300));
         for (int i = 1; i < 41; i++)

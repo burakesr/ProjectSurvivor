@@ -12,7 +12,7 @@ public class Health : MonoBehaviour, IDamageable
     public int GetMaxHealth => maxHealth;
     public int GetCurrentHealth => currentHealth;
 
-    public UnityAction<int> OnTakeDamage;
+    public UnityAction<int, bool, bool> OnTakeDamage;
     public UnityAction<int> OnHeal;
     public UnityAction OnDie;
 
@@ -27,15 +27,13 @@ public class Health : MonoBehaviour, IDamageable
         currentHealth = health;
     }
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(int damageAmount, bool isCritical, bool isDamageOverTime)
     {
         if (isDead) return;
 
-        damageAmount = DamageWithStrengthStat(damageAmount);
-
         currentHealth -= damageAmount;
 
-        OnTakeDamage?.Invoke(damageAmount);
+        OnTakeDamage?.Invoke(damageAmount, isCritical, isDamageOverTime);
 
         if (currentHealth <= 0)
         {
@@ -48,7 +46,7 @@ public class Health : MonoBehaviour, IDamageable
     {
         if (isDead) return;
 
-        ArmorStat armorStat = GameManager.Instance.GetPlayer().GetStatsManager.GetArmorStat;
+        ArmorStat armorStat = StatsManager.Instance.GetArmorStat;
 
         if (armorStat != null)
         {
@@ -57,7 +55,7 @@ public class Health : MonoBehaviour, IDamageable
 
         currentHealth -= damageAmount;
 
-        OnTakeDamage?.Invoke(damageAmount);
+        OnTakeDamage?.Invoke(damageAmount, false, false);
 
         if (currentHealth <= 0)
         {
@@ -82,11 +80,5 @@ public class Health : MonoBehaviour, IDamageable
     public float GetHealthFraction()
     {
         return (float)currentHealth / maxHealth;
-    }
-
-    private int DamageWithStrengthStat(int damageAmount)
-    {
-        damageAmount += GameManager.Instance.GetPlayer().GetStatsManager.GetStrengthStat.value;
-        return damageAmount;
     }
 }

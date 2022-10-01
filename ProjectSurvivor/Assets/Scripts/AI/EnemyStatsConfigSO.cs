@@ -7,6 +7,7 @@ public class EnemyStatsConfigSO : ScriptableObject
 {
     [Header("GENERAL")]
     public string enemyName;
+    public Sprite icon;
 
     [Space(10)]
     [Header("NAVIGATION AGENT VALUES")]

@@ -3,5 +3,7 @@
     Armor,
     MaxHealth,
     Recovery,
-    Strength
+    Strength,
+    CriticalChance,
+    CriticalDamage
 }

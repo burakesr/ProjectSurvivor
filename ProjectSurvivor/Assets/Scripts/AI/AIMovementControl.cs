@@ -41,17 +41,17 @@ public class AIMovementControl : MonoBehaviour
         if (m_pathFindTimer > 0f) return;
         if (m_targetPosition == m_player.transform.position) return;
 
-        Vector3 targetVelocity = m_player.GetRigidbody.velocity;
-        Vector3 predictedPos = HelperUtilities.GetPredictedPosition(m_player.transform.position, transform.position, targetVelocity, m_agent.velocity.magnitude);
+        Vector3 playerPos = m_player.transform.position;
+
+        //Vector3 targetVelocity = m_player.GetRigidbody.velocity;
+        //Vector3 predictedPos = HelperUtilities.GetPredictedPosition(m_player.transform.position, transform.position, targetVelocity, m_agent.velocity.magnitude);
 
         if (m_player && m_agent.enabled)
         {
-            m_targetPosition = predictedPos;
+            m_targetPosition = playerPos;
             m_agent.SetDestination(m_targetPosition);
             m_pathFindTimer = pathInterval;
         }
-
-        Debug.DrawLine(transform.position, predictedPos, Color.red);
     }
 
     private void OnCollisionEnter(Collision collision)

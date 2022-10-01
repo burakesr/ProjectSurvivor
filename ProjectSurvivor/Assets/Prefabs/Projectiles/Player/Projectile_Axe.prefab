@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 260490031904527743}
   - component: {fileID: 8320415754073165182}
   - component: {fileID: 220068267648368891}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Projectile_Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   knockBackCooldown: 1
-  knockBackForce: 2
+  knockBackForce: 0
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -70,6 +70,8 @@ MonoBehaviour:
   rotateSpeed: 270
   time: 2
   gravity: 9.8
+  rotate: 1
+  lookVelocityDirection: 0
 --- !u!1 &260490031904815939
 GameObject:
   m_ObjectHideFlags: 0

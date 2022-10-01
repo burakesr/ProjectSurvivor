@@ -1,28 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovementControl : MonoBehaviour
 {
-    [Header("GENERAL")]
-    [SerializeField] private CharacterConfigSO config;
-
-    private PlayerInputControl input;
-    private AnimatorController animController;
-    private Rigidbody rb;
+    private PlayerInputControl _input;
+    private AnimatorController _animController;
+    private Rigidbody _rb;
+    private Player _player;
 
     private Vector3 movementVector;
     private float turnSmoothVelocity;
     private bool isGrounded;
 
-
     private const float moveSpeedConstant = 100f;
 
     private void Awake()
     {
-        input = GetComponent<PlayerInputControl>();
-        animController = GetComponent<AnimatorController>();
-        rb = GetComponent<Rigidbody>();
+        _input = GetComponent<PlayerInputControl>();
+        _animController = GetComponent<AnimatorController>();
+        _rb = GetComponent<Rigidbody>();
+        _player = GetComponent<Player>();
     }
 
     private void FixedUpdate()
@@ -34,22 +30,22 @@ public class PlayerMovementControl : MonoBehaviour
 
     private void PlayerMoveHandler(RaycastHit groundCheckResult)
     {
-        Vector2 inputDirection = new Vector2(input.move.x, input.move.y).normalized;
+        Vector2 inputDirection = new Vector2(_input.move.x, _input.move.y).normalized;
 
         movementVector = new Vector3(inputDirection.x, 0f, inputDirection.y).normalized;
 
         if (inputDirection.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, config.turnSmoothness);
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, _player.CharacterConfig.turnSmoothness);
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            animController.OnCharacterWalking();
+            _animController.OnCharacterWalking();
         }
         else
         {
-            animController.OnCharacterIdle();
+            _animController.OnCharacterIdle();
         }
 
         if (isGrounded)
@@ -58,30 +54,30 @@ public class PlayerMovementControl : MonoBehaviour
             movementVector = Vector3.ProjectOnPlane(movementVector, groundCheckResult.normal);
 
             // If trying to move up to steep a slope
-            if (movementVector.y > 0 && Vector3.Angle(Vector3.up, groundCheckResult.normal) > config.slopeLimit)
+            if (movementVector.y > 0 && Vector3.Angle(Vector3.up, groundCheckResult.normal) > _player.CharacterConfig.slopeLimit)
             {
                 movementVector = Vector3.zero;
             }
         }
         else
         {
-            movementVector.y = config.gravityForce * Time.fixedDeltaTime;
+            movementVector.y = _player.CharacterConfig.gravityForce * Time.fixedDeltaTime;
         }
 
-        float currentSpeed = (moveSpeedConstant * config.moveSpeed);
-        rb.velocity = movementVector * currentSpeed * Time.fixedDeltaTime;
+        float currentSpeed = (moveSpeedConstant * _player.CharacterConfig.moveSpeed);
+        _rb.velocity = movementVector * currentSpeed * Time.fixedDeltaTime;
     }
 
     private RaycastHit GroundCheckHandler()
     {
         RaycastHit hit;
-        Vector3 startPos = rb.position + Vector3.up * config.height * 0.5f;
+        Vector3 startPos = _rb.position + Vector3.up * _player.CharacterConfig.height * 0.5f;
         
-        float groundCheckRadius = config.radius + config.groundCheckRadiusBuffer;
-        float groundCheckDistance = (config.height * 0.5f) - config.radius + config.groundCheckBuffer;
+        float groundCheckRadius = _player.CharacterConfig.radius + _player.CharacterConfig.groundCheckRadiusBuffer;
+        float groundCheckDistance = (_player.CharacterConfig.height * 0.5f) - _player.CharacterConfig.radius + _player.CharacterConfig.groundCheckBuffer;
 
         if (Physics.SphereCast(startPos, groundCheckRadius, Vector3.down,
-            out hit, groundCheckDistance, config.groundCheckLayer, QueryTriggerInteraction.Ignore))
+            out hit, groundCheckDistance, _player.CharacterConfig.groundCheckLayer, QueryTriggerInteraction.Ignore))
         {
             isGrounded = true;
 

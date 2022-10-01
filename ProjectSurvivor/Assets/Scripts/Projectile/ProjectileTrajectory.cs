@@ -8,6 +8,10 @@ public class ProjectileTrajectory : ProjectileBase
     private float time = 1f;
     [SerializeField]
     private float gravity = 9.8f;
+    [SerializeField]
+    private bool rotate;
+    [SerializeField]
+    private bool lookVelocityDirection;
 
     public Vector3 Velocity 
     {   
@@ -24,13 +28,23 @@ public class ProjectileTrajectory : ProjectileBase
         transform.position += velocity * Time.deltaTime * speed;
         velocity.y -= gravity * Time.deltaTime * speed;
 
-
         if (transform.position.y < 0)
         {
             gameObject.SetActive(false);
         }
 
-        transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime, Space.Self);
+        if (rotate)
+        {
+            transform.RotateAround(transform.position, transform.right, rotateSpeed * Time.deltaTime);
+        }
+
+        if (lookVelocityDirection)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(velocity, transform.position);
+            Quaternion lerpRotation = Quaternion.Lerp(transform.rotation, lookRotation, 5f * Time.deltaTime);
+
+            transform.rotation = lerpRotation;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,10 +52,12 @@ public class ProjectileTrajectory : ProjectileBase
         Collider[] colliders = Physics.OverlapSphere(hitDetectTransform.position, hitDetectRadius, hitLayer);
         foreach (Collider collider in colliders)
         {
-            Health health = collider.GetComponent<Health>();
-            if (health)
+            IDamageable damageable = collider.GetComponent<IDamageable>();
+            if (damageable != null)
             {
-                health.TakeDamage(damage);
+                p_damage = Damage(p_damage, ref isHitCritical);
+                DamagePopup(collider);
+                damageable.TakeDamage(p_damage, isHitCritical, false);
                 return;
             }
         }

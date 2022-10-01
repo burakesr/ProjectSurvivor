@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: UpgradeData_DamageUpgrade_ThrowingKnife
   m_EditorClassIdentifier: 
   upgradeType: 3
-  upgradeName: 
-  upgradeIcon: {fileID: 0}
-  weaponData: {fileID: 11400000, guid: d7801725491e21d49916e7001e86861c, type: 2}
-  weaponUpgrade: {fileID: 11400000, guid: 48ad4a5501858d4418cfda948de3c808, type: 2}
+  upgradeName: Throwing Knife
+  upgradeIcon: {fileID: 21300000, guid: 912f2333824ee3946814a450e92ab11a, type: 3}
+  abilityData: {fileID: 11400000, guid: 4d7b3ae735cd5114ab54dafb91976ece, type: 2}
+  abilityUpgrade: {fileID: 11400000, guid: 1d019e12addafbb468b2938ad849c361, type: 2}
   statConfig: {fileID: 0}
   upgradeValue: 0

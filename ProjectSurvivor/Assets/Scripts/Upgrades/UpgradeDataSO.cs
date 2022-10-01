@@ -10,8 +10,8 @@ public class UpgradeDataSO : ScriptableObject
 
     [Space(10)]
     [Header("WEAPON UPGRADE INFO")]
-    public WeaponDataSO weaponData;
-    public WeaponUpgradeSO weaponUpgrade;
+    public AbilityDataSO abilityData;
+    public AbilityUpgradeSO abilityUpgrade;
 
     [Space(10)]
     [Header("STAT UPGRADE INFO")]
@@ -21,30 +21,28 @@ public class UpgradeDataSO : ScriptableObject
 
     public void Upgrade()
     {
-        if (weaponUpgrade)
+        if (abilityUpgrade)
         {
-            weaponData.WeaponInstance.LevelUp();
-            weaponUpgrade.Upgrade(weaponData);
+            abilityData.AbilityInstance.LevelUp();
+            abilityUpgrade.Upgrade(abilityData);
         }
     }
 
     public void UpgradeStat()
     {
-        StatsManager statManager = GameManager.Instance.GetPlayer().GetStatsManager;
-
         switch (statConfig.statType)
         {
             case StatTypes.Armor:
-                statManager.GetArmorStat.Upgrade(upgradeValue);
+                StatsManager.Instance.GetArmorStat.Upgrade(upgradeValue);
                 break;
             case StatTypes.MaxHealth:
-                statManager.GetMaxHealthStat.Upgrade(upgradeValue);
+                StatsManager.Instance.GetMaxHealthStat.Upgrade(upgradeValue);
                 break;
             case StatTypes.Recovery:
-                statManager.GetRecoveryStat.Upgrade(upgradeValue);
+                StatsManager.Instance.GetRecoveryStat.Upgrade(upgradeValue);
                 break;
             case StatTypes.Strength:
-                statManager.GetStrengthStat.Upgrade(upgradeValue);
+                StatsManager.Instance.GetStrengthStat.Upgrade(upgradeValue);
                 break;
 
             default:

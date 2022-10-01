@@ -21,7 +21,7 @@ public class ProjectileBullet : ProjectileBase
         {
             DisableProjectile();
         }
-        transform.position += moveDirection * speed * Time.deltaTime;
+        transform.position += p_moveDirection * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,7 +36,7 @@ public class ProjectileBullet : ProjectileBase
 
     public override void Fire(Vector3 start, Vector3 end)
     {
-        moveDirection = (end - start).normalized;
-        transform.rotation = Quaternion.LookRotation(moveDirection);
+        p_moveDirection = (end - start).normalized;
+        transform.rotation = Quaternion.LookRotation(p_moveDirection);
     }
 }

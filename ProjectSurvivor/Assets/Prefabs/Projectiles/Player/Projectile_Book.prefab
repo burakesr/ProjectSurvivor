@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5251226945606849880}
   - component: {fileID: 2685237429569574348}
   - component: {fileID: 6909467995471209465}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Projectile_Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,9 +143,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  knockBackForce: 100
+  knockBackCooldown: 1
+  knockBackForce: 0
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
+  hitDetectTransform: {fileID: 0}
+  hitDetectRadius: 0.4
   rotateAroundPlayer: 1
   lifeTime: 8
+  damageCooldownTime: 0.25
+  collectiveEffectApplyTime: 0.5
+  destroyOnLifeTimeEnd: 1

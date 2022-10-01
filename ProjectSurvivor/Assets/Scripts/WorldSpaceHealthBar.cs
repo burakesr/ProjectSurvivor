@@ -30,7 +30,7 @@ public class WorldSpaceHealthBar : MonoBehaviour
         health.OnTakeDamage -= RefreshHealthBar;
     }
 
-    private void RefreshHealthBar(int amount)
+    private void RefreshHealthBar(int amount, bool isCritical, bool isDamageOverTime)
     {
         if (health.GetHealthFraction() != 1.0f)
             barBackground.SetActive(true);

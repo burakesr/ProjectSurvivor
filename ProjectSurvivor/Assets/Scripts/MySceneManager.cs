@@ -37,10 +37,9 @@ public class MySceneManager : SingletonMonoBehaviour<MySceneManager>
 
         UIManager.Instance.OpenMainMenu();
     }
-
-
+    
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
-    public void LoadGame()
+    public void LoadGame(SceneIndexes scene)
     {
         UIManager.Instance.CloseMainMenu();
         GameManager.Instance.GetCameras().SetActive(true);
@@ -48,7 +47,7 @@ public class MySceneManager : SingletonMonoBehaviour<MySceneManager>
 
         
         scenesLoading.Add(SceneManager.UnloadSceneAsync((int)SceneIndexes.MENU));
-        scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.GAMEPLAY, LoadSceneMode.Additive));
+        scenesLoading.Add(SceneManager.LoadSceneAsync((int)scene, LoadSceneMode.Additive));
 
         StartCoroutine(GetSceneLoadProgress());
     }

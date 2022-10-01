@@ -5,4 +5,11 @@ public class StrengthStat : Stat
         statConfigure = strengthStat;
         value = strengthStat.baseValue;
     }
+
+    
+    public int DamageWithStrengthStat(int damageAmount)
+    {
+        damageAmount += StatsManager.Instance.GetStrengthStat.value;
+        return damageAmount;
+    }
 }

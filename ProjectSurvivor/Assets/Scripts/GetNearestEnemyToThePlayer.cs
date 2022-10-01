@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using System;
 
 public class GetNearestEnemyToThePlayer : MonoBehaviour
@@ -9,23 +8,7 @@ public class GetNearestEnemyToThePlayer : MonoBehaviour
     [SerializeField] 
     private LayerMask enemyLayer;
     [SerializeField]
-    private int test;
-    [SerializeField]
     private Target[] targets;
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radius);
-    }
-
-    private void Update()
-    {
-        if (Keyboard.current.tKey.wasPressedThisFrame)
-        {
-            GetNearestEnemies(test);
-        }
-    }
 
     public Transform[] GetNearestEnemies(int count)
     {
@@ -78,6 +61,12 @@ public class GetNearestEnemyToThePlayer : MonoBehaviour
         }
 
         return closestTransforms;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
 

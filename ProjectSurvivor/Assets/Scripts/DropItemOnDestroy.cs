@@ -33,7 +33,7 @@ public class DropItemOnDestroy : MonoBehaviour
 }
 
 [System.Serializable]
-public class PickupableItems
+public struct PickupableItems
 {
     public GameObject prefab;
     [Range(0f, 100f)]

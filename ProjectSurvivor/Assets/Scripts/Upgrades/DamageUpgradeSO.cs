@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DamageUpgrade_New", menuName = "ScriptableObjects/WeaponUpgrades/Damage Upgrade")]
-public class DamageUpgradeSO : WeaponUpgradeSO
+[CreateAssetMenu(fileName = "DamageUpgrade_New", menuName = "ScriptableObjects/AbilityUpgrades/Damage Upgrade")]
+public class DamageUpgradeSO : AbilityUpgradeSO
 {
-    public WeaponStats[] statsByLevel;
+    public AbilityStats[] statsByLevel;
 
-    public override void Upgrade(WeaponDataSO weaponData)
+    public override void Upgrade(AbilityDataSO weaponData)
     {
-        WeaponStats newStats = statsByLevel[weaponData.WeaponInstance.GetCurrentLevel - 2];
+        AbilityStats newStats = statsByLevel[weaponData.AbilityInstance.GetCurrentLevel - 2];
 
-        weaponData.WeaponInstance.GetWeaponStats = newStats;
+        weaponData.AbilityInstance.GetWeaponStats = newStats;
 
         Debug.Log("Upgrade Applied!");
     }

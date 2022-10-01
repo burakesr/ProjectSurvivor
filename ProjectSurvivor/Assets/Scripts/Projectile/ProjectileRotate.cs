@@ -11,6 +11,8 @@ public class ProjectileRotate : ProjectileBase
     private float damageCooldownTime = 0.25f;
     [SerializeField]
     private float collectiveEffectApplyTime = 0.5f;
+    [SerializeField]
+    private bool destroyOnLifeTimeEnd = false;
 
     private Transform pivotPoint;
     private Vector3 offSetDirection;
@@ -19,6 +21,8 @@ public class ProjectileRotate : ProjectileBase
     private float lifeTimer;
     private float damageCooldownTimer;
     private float collectiveEffectApplyTimer;
+
+    private List<Collider> collectiveApplyEffectTargets = new List<Collider>();
 
     private void Start()
     {
@@ -35,6 +39,11 @@ public class ProjectileRotate : ProjectileBase
     private void OnEnable()
     {
         lifeTimer = lifeTime;
+    }
+
+    private void OnDisable() 
+    {
+        transform.position = Vector3.zero;
     }
 
 
@@ -55,7 +64,14 @@ public class ProjectileRotate : ProjectileBase
 
         if (lifeTimer <= 0f)
         {
-            DisableProjectile();
+            if (destroyOnLifeTimeEnd)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                DisableProjectile();
+            }
         }
 
         if (collectiveApplyEffectTargets.Count > 0 && collectiveEffectApplyTimer >= collectiveEffectApplyTime)
@@ -69,7 +85,7 @@ public class ProjectileRotate : ProjectileBase
                 collectiveApplyEffectTargets.Remove(collectiveApplyEffectTargets[i]);
             }
 
-            collectiveEffectApplyTimer = weaponData.effectApplyCooldown;
+            collectiveEffectApplyTimer = p_weaponData.effectApplyCooldown;
         }
     }
 
@@ -85,26 +101,22 @@ public class ProjectileRotate : ProjectileBase
         transform.RotateAround(pivotPoint.position, Vector3.up, speed * 90f * Time.deltaTime);
     }
 
-    private List<Collider> collectiveApplyEffectTargets = new List<Collider>();
-
     private void OnTriggerEnter(Collider other)
     {
-        Health health = other.GetComponent<Health>();
+        IDamageable damageable = other.GetComponent<IDamageable>();
 
-        if (health && !health.isPlayer)
+        if (damageable != null)
         {
-            if (health != damagedEnemy)
+            if (damageable != p_damagedTarget)
             {
-                damagedEnemy = health;
-
-                InflictDamage(other, health);
+                p_damagedTarget = damageable;
+                InflictDamage(other, damageable);
             }
-
-            if (health == damagedEnemy)
+            else
             {
                 if (damageCooldownTimer <= 0f)
                 {
-                    InflictDamage(other, health);
+                    InflictDamage(other, damageable);
                 }
             }
         }
@@ -118,27 +130,32 @@ public class ProjectileRotate : ProjectileBase
         Collider[] colliders = Physics.OverlapSphere(hitDetectTransform.position, hitDetectRadius, hitLayer, QueryTriggerInteraction.Ignore);
         foreach (var collider in colliders)
         {
-            Health health = collider.GetComponent<Health>();
-            if (health && !health.isPlayer)
+            IDamageable damageable = collider.GetComponent<IDamageable>();
+            if (damageable != null)
             {
-                InflictDamage(collider, health);
+                InflictDamage(collider, damageable);
             }
         }
     }
 
-    private void InflictDamage(Collider other, Health health)
+    private void InflictDamage(Collider collider, IDamageable target)
     {
         // Add colliders to collective effect apply list
         if (collectiveEffectApplyTimer > 0f)
         {
-            if (collectiveApplyEffectTargets.Contains(other)) return;
+            if (collectiveApplyEffectTargets.Contains(collider)) return;
 
-            collectiveApplyEffectTargets.Add(other);
+            collectiveApplyEffectTargets.Add(collider);
         }
 
-        health.TakeDamage(damage);
+        p_damage = Damage(p_damage, ref isHitCritical);
+
+        target.TakeDamage(p_damage, isHitCritical, false);
+
+        //Damage popup
+        DamagePopup(collider);
         //ApplyEffect(other);
-        KnockBack(other);
+        KnockBack(collider);
 
         damageCooldownTimer = damageCooldownTime;
     }

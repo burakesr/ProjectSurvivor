@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     protected enum EnemyState
     {
@@ -19,7 +18,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected Transform damagePopupSpawnTransform = null;
     [SerializeField]
-    protected EnemyState m_currentState;
+    protected EnemyState currentState;
 
     [Space(10)]
     [Header("ATTACK VARIABLES")]
@@ -36,63 +35,73 @@ public class Enemy : MonoBehaviour
     private float rotateTowardsTargetSpeed = 20f;
     [SerializeField]
     private RotationDirection m_rotationDirection = RotationDirection.NoRotation;
+    [SerializeField]
+    private bool canRotateWhileAttacking = false;
+    [SerializeField]
+    private float chaseWaitTime = 0.3f;
 
     public Transform GetAimPoint => aimPoint;
-    public Health GetHealth => m_health;
-    public NavMeshAgent GetAgent => m_agent;
-    public AIMovementControl GetMovementControl => m_movementControl;
-    public Player GetPlayer => m_player;
+    public Health GetHealth => p_health;
+    public NavMeshAgent GetAgent => p_agent;
+    public AIMovementControl GetMovementControl => p_movementControl;
+    public Player GetPlayer => p_player;
+    public Transform GetDamagePopupSpawnTransform => damagePopupSpawnTransform;
 
-    protected Health m_health;
-    protected DropItemOnDestroy m_dropItemOnDestroy;
-    protected NavMeshAgent m_agent;
-    protected Player m_player;
-    protected AIMovementControl m_movementControl;
-    protected AnimatorController m_animController;
+    protected Health p_health;
+    protected DropItemOnDestroy p_dropItemOnDestroy;
+    protected NavMeshAgent p_agent;
+    protected Player p_player;
+    protected AIMovementControl p_movementControl;
+    protected AnimatorController p_animController;
 
-    protected float m_contactDamageTimer;
-    protected float m_attackTimer;
-    protected float m_agentStopDelayTimer;
+    protected float p_contactDamageTimer;
+    protected float p_attackTimer;
+    protected float p_agentStopDelayTimer;
+    protected float p_chaseWaitTimer;
 
-    protected const float m_agentStopDelay = 0.5f;
+    protected const float p_agentStopDelay = 0.5f;
 
     private void Awake()
     {
-        m_health = GetComponent<Health>();
-        m_agent = GetComponent<NavMeshAgent>();
-        m_dropItemOnDestroy = GetComponent<DropItemOnDestroy>();
-        m_movementControl = GetComponent<AIMovementControl>();
-        m_animController = GetComponent<AnimatorController>();
+        p_health = GetComponent<Health>();
+        p_agent = GetComponent<NavMeshAgent>();
+        p_dropItemOnDestroy = GetComponent<DropItemOnDestroy>();
+        p_movementControl = GetComponent<AIMovementControl>();
+        p_animController = GetComponent<AnimatorController>();
     }
 
     private void Start()
     {
         StatsInitialisation();
 
-        m_player = GameManager.Instance.GetPlayer();
+        p_player = GameManager.Instance.GetPlayer();
     }
 
     private void OnEnable()
     {
-        m_health.OnTakeDamage += OnTakeDamage;
-        m_health.OnDie += Die;
+        //p_health.OnTakeDamage += OnTakeDamage;
+        p_health.OnDie += Die;
 
-        m_health.SetStartingHealth(stats.maxHealth);
+        m_isAttacking = false;
+        p_agent.enabled = true;
+
+        p_health.SetStartingHealth(stats.maxHealth);
     }
 
     private void OnDisable()
     {
-        m_health.OnTakeDamage -= OnTakeDamage;
-        m_health.OnDie -= Die;
+        //p_health.OnTakeDamage -= OnTakeDamage;
+        p_health.OnDie -= Die;
     }
 
     private void Update()
     {
-        m_contactDamageTimer -= Time.deltaTime;
-        m_attackTimer -= Time.deltaTime;
-        m_agentStopDelayTimer -= Time.deltaTime;
+        p_contactDamageTimer -= Time.deltaTime;
+        p_attackTimer -= Time.deltaTime;
+        p_agentStopDelayTimer -= Time.deltaTime;
+        p_chaseWaitTimer -= Time.deltaTime;
 
-        bool targetInRangeOfAttack = Vector3.Distance(transform.position, m_player.transform.position) < stats.attackRange;
+        bool targetInRangeOfAttack = Vector3.Distance(transform.position, p_player.transform.position) < stats.attackRange;
 
         AIStateHandler(targetInRangeOfAttack);
         AnimatonHandler();
@@ -100,50 +109,69 @@ public class Enemy : MonoBehaviour
 
     private void AnimatonHandler()
     {
-        if (m_agent.velocity.sqrMagnitude >= 0.1f)
+        if (p_agent.velocity.sqrMagnitude >= 0.01f)
         {
-            m_animController.OnCharacterWalking();
+            p_animController.OnCharacterWalking();
         }
-        else if (m_agent.velocity.sqrMagnitude <= 0.1f)
+        else if (p_agent.velocity.sqrMagnitude <= 0.01f)
         {
-            m_animController.OnCharacterIdle();
+            p_animController.OnCharacterIdle();
         }
     }
 
     private void AIStateHandler(bool targetInRangeOfAttack)
     {
-        if (targetInRangeOfAttack && m_attackTimer < 0f)
+        if (targetInRangeOfAttack && p_attackTimer < 0f)
         {
-            m_currentState = EnemyState.Attack;
+            currentState = EnemyState.Attack;
         }
-        else if (targetInRangeOfAttack && m_attackTimer > 0f)
+        else if (targetInRangeOfAttack && p_attackTimer > 0f)
         {
-            m_currentState = EnemyState.TargetInRange;
+            currentState = EnemyState.TargetInRange;
         }
-        else if (!targetInRangeOfAttack)
+        else if (!targetInRangeOfAttack && !m_isAttacking)
         {
-            m_currentState = EnemyState.Chase;
+            currentState = EnemyState.Chase;
         }
 
-        switch (m_currentState)
+        switch (currentState)
         {
             case EnemyState.Attack:
-                if (m_attackTimer < 0f)
-                {
-                    StartCoroutine(AttackRoutine());
-                }
-                break;
+            p_chaseWaitTimer = chaseWaitTime;
+
+            if (p_attackTimer < 0f)
+            {
+                StartCoroutine(AttackRoutine());
+                p_attackTimer = stats.attackInterval;
+            }
+            break;
 
             case EnemyState.TargetInRange:
+            p_chaseWaitTimer = chaseWaitTime;
+
+            if (m_isAttacking)
+            {
+                if (canRotateWhileAttacking)
+                {
+                    RotateTowardsTarget();
+                }
+            }
+            else if (!m_isAttacking)
+            {
                 RotateTowardsTarget();
-                break;
+            }
+            break;
 
             case EnemyState.Chase:
-                m_movementControl.MoveTowardsPlayer();
-                break;
+            
+            if (p_chaseWaitTimer < 0f)
+            {
+                p_movementControl.MoveTowardsPlayer();
+            }
+            break;
 
             default:
-                break;
+            break;
         }
     }
 
@@ -159,21 +187,21 @@ public class Enemy : MonoBehaviour
 
     private void StatsInitialisation()
     {
-        m_agent.speed = stats.speed;
-        m_agent.angularSpeed = stats.angularSpeed;
-        m_agent.acceleration = stats.acceleration;
-        m_agent.stoppingDistance = stats.attackRange;
-        m_agent.autoBraking = stats.autoBraking;
+        p_agent.speed = stats.speed;
+        p_agent.angularSpeed = stats.angularSpeed;
+        p_agent.acceleration = stats.acceleration;
+        p_agent.stoppingDistance = stats.attackRange;
+        p_agent.autoBraking = stats.autoBraking;
     }
 
     private void CollisionDamageToPlayer(Collision collision)
     {
         Player player = collision.gameObject.GetComponent<Player>();
 
-        if (player && m_contactDamageTimer <= 0)
+        if (player && p_contactDamageTimer <= 0)
         {
             player.GetHealth.TakeArmoredDamage(stats.contactDamage);
-            m_contactDamageTimer = stats.attackInterval;
+            p_contactDamageTimer = stats.attackInterval;
         }
     }
 
@@ -181,17 +209,17 @@ public class Enemy : MonoBehaviour
 
     protected IEnumerator AttackRoutine()
     {
-        m_agent.enabled = false;
         m_isAttacking = true;
-        m_agent.velocity = Vector3.zero;
+        p_agent.enabled = false;
+        p_agent.velocity = Vector3.zero;
 
         yield return new WaitForSeconds(waitBeforeAttackAnim);
-        m_animController.AttackTrigger();
-        m_attackTimer = stats.attackInterval;
+        p_animController.AttackTrigger();
+        p_attackTimer = stats.attackInterval;
         yield return new WaitForSeconds(waitAfterAttackAnim);
 
         m_isAttacking = false;
-        m_agent.enabled = true;
+        p_agent.enabled = true;
     }
 
     public enum RotationDirection
@@ -206,7 +234,7 @@ public class Enemy : MonoBehaviour
     {
         Vector3 oldForward = transform.forward;
 
-        Vector3 direction = m_player.transform.position - transform.position;
+        Vector3 direction = p_player.transform.position - transform.position;
         Quaternion lookTo = Quaternion.LookRotation(direction);
 
         float rotateSpeed = rotateTowardsTargetSpeed * Time.deltaTime;
@@ -231,28 +259,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void StartAttackAnimationEvent()
-    {
-        attackTrigger.SetDamage(stats.attackDamage);
-        attackTrigger.EnableTrigger();
-    }
+    public abstract void StartAttackAnimationEvent();
 
-    public virtual void StopAttackAnimationEvent()
-    {
-        attackTrigger.DisableTrigger();
-    }
-
+    public abstract void StopAttackAnimationEvent();
+    
     protected virtual void Die()
     {
         gameObject.SetActive(false);
 
         EnemySpawnManager.Instance.OnRemoveToEnemiesList(this);
         GameManager.Instance.UpdateKillCount();
-        m_dropItemOnDestroy.DropItem();
+        p_dropItemOnDestroy.DropItem();
     }
 
-    private void OnTakeDamage(int amount)
-    {
-        GameManager.Instance.CreateDamagePopup(damagePopupSpawnTransform.position, amount);
-    }
+    // private void OnTakeDamage(int amount)
+    // {
+    //     GameManager.Instance.CreateDamagePopup(damagePopupSpawnTransform.position, amount);
+    // }
 }

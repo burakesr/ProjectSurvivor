@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 7054697623587297508}
   - component: {fileID: 7054697623587297509}
   - component: {fileID: 7054697623587297506}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Projectile_Dagger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   knockBackCooldown: 1
-  knockBackForce: 10
+  knockBackForce: 0
   hitLayer:
     serializedVersion: 2
     m_Bits: 128

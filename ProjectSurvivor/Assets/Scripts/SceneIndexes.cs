@@ -2,5 +2,6 @@
 {
     PERSISTENT = 0,
     MENU = 1,
-    GAMEPLAY = 2
+    GAMEPLAY_1 = 2,
+    GAMEPLAY_2 = 3
 }

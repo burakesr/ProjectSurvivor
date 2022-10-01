@@ -34,12 +34,12 @@ public class ProjectileFromAbove : ProjectileBase
             gameObject.SetActive(false);
         }
 
-        transform.position += moveDirection * speed * Time.deltaTime;
+        transform.position += p_moveDirection * speed * Time.deltaTime;
 
     }
 
     public override void Fire(Vector3 start, Vector3 end)
     {
-        moveDirection = (end - start).normalized;
+        p_moveDirection = (end - start).normalized;
     }
 }

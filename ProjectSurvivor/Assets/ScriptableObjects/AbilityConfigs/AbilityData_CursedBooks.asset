@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea735ff4e92235b4ca3edab5d8ee92d3, type: 3}
+  m_Name: AbilityData_CursedBooks
+  m_EditorClassIdentifier: 
+  weaponName: Cursed Books
+  maxLevel: 8
+  abilityStats:
+    damage: 5
+    timeToAttack: 10
+  abilityPrefab: {fileID: -6756670494262056911, guid: 567783c75dea29a4c910e730b7119e77,
+    type: 3}
+  upgradesByLevel:
+  - {fileID: 11400000, guid: d4b76d7285c782e48b7a0671e53a2733, type: 2}
+  - {fileID: 11400000, guid: a6c6109d0926a52428fa4e47fdbf8bf8, type: 2}
+  - {fileID: 11400000, guid: d4b76d7285c782e48b7a0671e53a2733, type: 2}
+  - {fileID: 11400000, guid: d4b76d7285c782e48b7a0671e53a2733, type: 2}
+  - {fileID: 11400000, guid: a6c6109d0926a52428fa4e47fdbf8bf8, type: 2}
+  - {fileID: 11400000, guid: d4b76d7285c782e48b7a0671e53a2733, type: 2}
+  - {fileID: 11400000, guid: a6c6109d0926a52428fa4e47fdbf8bf8, type: 2}
+  - {fileID: 11400000, guid: d4b76d7285c782e48b7a0671e53a2733, type: 2}
+  chanceToApplyEffect: 100
+  effectApplyCooldown: 1
+  effect: {fileID: 0}

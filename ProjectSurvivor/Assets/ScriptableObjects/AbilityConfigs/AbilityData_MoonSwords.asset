@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea735ff4e92235b4ca3edab5d8ee92d3, type: 3}
+  m_Name: AbilityData_MoonSwords
+  m_EditorClassIdentifier: 
+  weaponName: Moon Swords
+  maxLevel: 7
+  abilityStats:
+    damage: 5
+    timeToAttack: 8
+  abilityPrefab: {fileID: -3842407760405080305, guid: 6285cb329ad3f254ab29459f95fa7f24,
+    type: 3}
+  upgradesByLevel:
+  - {fileID: 11400000, guid: c4b4fbd0f325c144980f04de8dd4a96c, type: 2}
+  - {fileID: 11400000, guid: 0f74cb799a3d1ed4c94d8316afd87771, type: 2}
+  - {fileID: 11400000, guid: c4b4fbd0f325c144980f04de8dd4a96c, type: 2}
+  - {fileID: 11400000, guid: c4b4fbd0f325c144980f04de8dd4a96c, type: 2}
+  - {fileID: 11400000, guid: 0f74cb799a3d1ed4c94d8316afd87771, type: 2}
+  - {fileID: 11400000, guid: c4b4fbd0f325c144980f04de8dd4a96c, type: 2}
+  - {fileID: 11400000, guid: c4b4fbd0f325c144980f04de8dd4a96c, type: 2}
+  chanceToApplyEffect: 100
+  effectApplyCooldown: 1
+  effect: {fileID: 0}

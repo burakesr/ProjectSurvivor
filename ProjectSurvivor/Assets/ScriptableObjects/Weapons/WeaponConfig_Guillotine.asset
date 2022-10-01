@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb09ac08a6465ca41b18ed606b522ce9, type: 3}
+  m_Name: WeaponConfig_Guillotine
+  m_EditorClassIdentifier: 
+  weaponName: Guillotine
+  weaponPrefab: {fileID: 1709157848179573630, guid: bbd83be2bf086b545b4c4ace93fbcbcd,
+    type: 3}
+  weaponIcon: {fileID: 21300000, guid: 4dc051a0301cecb4aa1a85036ace2a58, type: 3}
+  unlocked: 1
+  armorStatUpgradeValue: 0
+  strengthStatUpgradeValue: 10
+  maxLifeStatUpgradeValue: 0
+  recoveryStatUpgradeValue: 2
+  criticalHitChanceStatUpgradeValue: 20
+  criticalDamageStatUpgradeValue: 30

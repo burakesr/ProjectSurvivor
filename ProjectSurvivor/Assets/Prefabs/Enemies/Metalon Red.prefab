@@ -1335,7 +1335,7 @@ PrefabInstance:
     - target: {fileID: 7484439201918923601, guid: 67bd8d9fba01a57479c77a8878ba4dfd,
         type: 3}
       propertyPath: items.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7484439201918923601, guid: 67bd8d9fba01a57479c77a8878ba4dfd,
         type: 3}
@@ -1348,6 +1348,12 @@ PrefabInstance:
       propertyPath: items.Array.data[1].prefab
       value: 
       objectReference: {fileID: 1270355405216786305, guid: 12863e383bcbd83489ff41a680ffa8fa,
+        type: 3}
+    - target: {fileID: 7484439201918923601, guid: 67bd8d9fba01a57479c77a8878ba4dfd,
+        type: 3}
+      propertyPath: items.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 1270355405216786305, guid: e3faa5c10595bf54f9a3365142fea7a7,
         type: 3}
     - target: {fileID: 7484439201918923601, guid: 67bd8d9fba01a57479c77a8878ba4dfd,
         type: 3}
@@ -1367,6 +1373,16 @@ PrefabInstance:
     - target: {fileID: 7484439201918923601, guid: 67bd8d9fba01a57479c77a8878ba4dfd,
         type: 3}
       propertyPath: items.Array.data[1].spawnYVector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484439201918923601, guid: 67bd8d9fba01a57479c77a8878ba4dfd,
+        type: 3}
+      propertyPath: items.Array.data[2].chanceToDrop
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484439201918923601, guid: 67bd8d9fba01a57479c77a8878ba4dfd,
+        type: 3}
+      propertyPath: items.Array.data[2].spawnYVector
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
