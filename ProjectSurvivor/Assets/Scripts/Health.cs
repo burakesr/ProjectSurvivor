@@ -3,8 +3,6 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour, IDamageable
 {
-    public bool isPlayer = false;
-
     private int maxHealth;
     private int currentHealth;
     private bool isDead;

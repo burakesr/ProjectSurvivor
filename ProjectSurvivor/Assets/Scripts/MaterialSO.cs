@@ -4,4 +4,12 @@ using UnityEngine;
 public class MaterialSO : ScriptableObject 
 {
     public Sprite icon;
+    public MaterialType type;
+}
+
+public enum MaterialType
+{
+    MindSilver,
+    Taragotium,
+    Orichalcum
 }

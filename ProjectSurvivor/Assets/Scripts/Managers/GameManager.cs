@@ -12,6 +12,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public DamagePopup damagePopupPrefab;
     [SerializeField]
     private GameObject cameras;
+    [SerializeField]
+    private PlayerStats playerStats;
 
     [SerializeField]
     private float gameCountDownTime = 600;
@@ -24,6 +26,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private Player m_player;
     private bool m_isGamePaused;
 
+    public PlayerStats PlayerStats => playerStats;
     public Player PlayerPrefab{
         get
         {

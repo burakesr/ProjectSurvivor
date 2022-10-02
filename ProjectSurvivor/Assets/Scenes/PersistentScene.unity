@@ -1306,7 +1306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &698170035
 Transform:
   m_ObjectHideFlags: 0
@@ -3519,7 +3519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62181d1342240ba409c6bb39203630ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTesting: 0
+  isTesting: 1
 --- !u!1 &2111353131
 GameObject:
   m_ObjectHideFlags: 0
@@ -3780,12 +3780,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc77940f6bde7cd47af3f896d06b49f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTestBuild: 0
+  isTestBuild: 1
   playerPrefab: {fileID: 4569433636649381043, guid: a9861d5cf4ea3fd49bca48e77faa3fab,
     type: 3}
   damagePopupPrefab: {fileID: 7099243238633297937, guid: 944295916e50cbd499425865a202d4a5,
     type: 3}
   cameras: {fileID: 698170034}
+  playerStats: {fileID: 11400000, guid: db8978c2fcac54740bb34b46025482a1, type: 2}
   gameCountDownTime: 600
   gameStarted: 0
   IsPlayerSpawned: 0
