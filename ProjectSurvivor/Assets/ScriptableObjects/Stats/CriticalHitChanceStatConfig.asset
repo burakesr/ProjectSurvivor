@@ -15,5 +15,5 @@ MonoBehaviour:
   statName: 
   statIcon: {fileID: 0}
   statType: 4
-  baseValue: 50
+  baseValue: 15
   capValue: 100

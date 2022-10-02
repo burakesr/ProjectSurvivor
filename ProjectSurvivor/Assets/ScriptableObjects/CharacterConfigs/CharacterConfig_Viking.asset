@@ -16,8 +16,10 @@ MonoBehaviour:
   characterIcon: {fileID: 0}
   modelPrefab: {fileID: 919132149155446097, guid: 20221e192e3f84d4ab623e10431ba0b7,
     type: 3}
+  playerPrefab: {fileID: 4569433636649381043, guid: 212c6691f9370894f89357f5f1025af5,
+    type: 3}
   startingAbility: {fileID: 11400000, guid: 4d7b3ae735cd5114ab54dafb91976ece, type: 2}
-  startingWeapon: {fileID: 11400000, guid: 3b8093024c3f16047a43cbb821c6d430, type: 2}
+  equippedWeapon: {fileID: 11400000, guid: e6d1b0849b407a14f865bc15314c3440, type: 2}
   weapons:
   - {fileID: 11400000, guid: 3b8093024c3f16047a43cbb821c6d430, type: 2}
   - {fileID: 11400000, guid: e6d1b0849b407a14f865bc15314c3440, type: 2}

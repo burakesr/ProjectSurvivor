@@ -17,9 +17,9 @@ MonoBehaviour:
     type: 3}
   weaponIcon: {fileID: 21300000, guid: 4dc051a0301cecb4aa1a85036ace2a58, type: 3}
   unlocked: 1
-  armorStatUpgradeValue: 0
-  strengthStatUpgradeValue: 10
-  maxLifeStatUpgradeValue: 0
-  recoveryStatUpgradeValue: 2
-  criticalHitChanceStatUpgradeValue: 20
-  criticalDamageStatUpgradeValue: 30
+  armorStatUpgradeValue: -5
+  strengthStatUpgradeValue: 3
+  maxLifeStatUpgradeValue: 10
+  recoveryStatUpgradeValue: 0
+  criticalHitChanceStatUpgradeValue: 10
+  criticalDamageStatUpgradeValue: 25

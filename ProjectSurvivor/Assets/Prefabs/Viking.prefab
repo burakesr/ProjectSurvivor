@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Viking
       objectReference: {fileID: 0}
+    - target: {fileID: 3576881452626991689, guid: e37ad2fe7d2207d46af8f781916ac7df,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 20221e192e3f84d4ab623e10431ba0b7, type: 3}
     - target: {fileID: 3576881452626991690, guid: e37ad2fe7d2207d46af8f781916ac7df,
         type: 3}
       propertyPath: m_RootOrder

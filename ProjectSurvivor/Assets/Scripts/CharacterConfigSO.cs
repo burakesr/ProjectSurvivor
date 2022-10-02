@@ -7,6 +7,7 @@ public class CharacterConfigSO : ScriptableObject
     public string characterName;
     public Sprite characterIcon;
     public GameObject modelPrefab;
+    public Player playerPrefab;
     public AbilityDataSO startingAbility;
     public WeaponConfigSO equippedWeapon;
     public WeaponConfigSO[] weapons;

@@ -40,15 +40,15 @@ public class ProjectileBase : MonoBehaviour
     public void SetUp(float speed, int damage)
     {
         this.speed = speed;
-        this.p_damage = damage;
+        p_damage = damage;
     }
 
     public void SetUp(float speed, Vector3 moveDirection, int damage, AbilityDataSO weaponData)
     {
         this.speed = speed;
-        this.p_moveDirection = moveDirection;
-        this.p_damage = damage;
-        this.p_weaponData = weaponData;
+        p_moveDirection = moveDirection;
+        p_damage = damage;
+        p_weaponData = weaponData;
     }
 
 
@@ -63,12 +63,13 @@ public class ProjectileBase : MonoBehaviour
         {
             if (damageable != p_damagedTarget)
             {
-                p_damage = Damage(p_damage, ref isHitCritical);
+                int damage = p_damage;
+                damage = Damage(damage, ref isHitCritical);
 
-                damageable.TakeDamage(p_damage, isHitCritical, false);
+                damageable.TakeDamage(damage, isHitCritical, false);
                 p_damagedTarget = damageable;
 
-                DamagePopup(other);
+                DamagePopup(other, damage);
                 ApplyEffect(other);
                 KnockBack(other);
             }
@@ -104,26 +105,28 @@ public class ProjectileBase : MonoBehaviour
     }
 
     protected bool isHitCritical;
+    
     protected int Damage(int damage, ref bool isHitCritical)
     {
-        p_damage = StatsManager.Instance.GetStrengthStat.DamageWithStrengthStat(damage);
+        int totalDamage = damage;
+        totalDamage = StatsManager.Instance.GetStrengthStat.DamageWithStrengthStat(totalDamage);
         
         isHitCritical = StatsManager.Instance.GetCriticalHitChanceStat.IsHitCritical();
 
         if (isHitCritical)
         {
-            p_damage = StatsManager.Instance.GetCriticalHitDamageStat.CriticalDamage(p_damage);
+            totalDamage = StatsManager.Instance.GetCriticalHitDamageStat.CriticalDamage(totalDamage);
         }
 
-        return p_damage;
+        return totalDamage;
     }
 
-    protected void DamagePopup(Collider other){
+    protected void DamagePopup(Collider other, int damage){
         Enemy enemy = other.GetComponent<Enemy>();
         if (enemy){
             //Create damage popup
             GameManager.Instance.CreateDamagePopup(enemy.GetDamagePopupSpawnTransform.position, 
-            p_damage, isHitCritical, false);
+            damage, isHitCritical, false);
         }
     }
 

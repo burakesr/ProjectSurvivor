@@ -148,12 +148,13 @@ public class ProjectileRotate : ProjectileBase
             collectiveApplyEffectTargets.Add(collider);
         }
 
-        p_damage = Damage(p_damage, ref isHitCritical);
+        int damage = p_damage;
+        damage = Damage(damage, ref isHitCritical);
 
-        target.TakeDamage(p_damage, isHitCritical, false);
+        target.TakeDamage(damage, isHitCritical, false);
 
         //Damage popup
-        DamagePopup(collider);
+        DamagePopup(collider, damage);
         //ApplyEffect(other);
         KnockBack(collider);
 

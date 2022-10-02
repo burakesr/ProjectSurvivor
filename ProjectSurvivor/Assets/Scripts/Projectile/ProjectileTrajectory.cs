@@ -55,9 +55,11 @@ public class ProjectileTrajectory : ProjectileBase
             IDamageable damageable = collider.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                p_damage = Damage(p_damage, ref isHitCritical);
-                DamagePopup(collider);
-                damageable.TakeDamage(p_damage, isHitCritical, false);
+                int damage = p_damage;
+
+                damage = Damage(damage, ref isHitCritical);
+                DamagePopup(collider, damage);
+                damageable.TakeDamage(damage, isHitCritical, false);
                 return;
             }
         }

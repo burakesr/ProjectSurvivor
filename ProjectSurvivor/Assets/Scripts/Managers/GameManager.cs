@@ -24,6 +24,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private Player m_player;
     private bool m_isGamePaused;
 
+    public Player PlayerPrefab{
+        get
+        {
+            return playerPrefab;
+        }
+        set
+        {
+            playerPrefab = value;
+        }
+    }
+
     [HideInInspector]
     public bool IsPlayerSpawned;
     public event Action OnPlayerSpawned;
