@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: EnemyStatsConfig_StoneHover
   m_EditorClassIdentifier: 
   enemyName: Stone Hover
+  icon: {fileID: 0}
   speed: 2.5
   angularSpeed: 720
   acceleration: 50
-  stoppingDistance: 1
+  stoppingDistance: 0
   autoBraking: 1
   maxHealth: 25
   contactDamage: 5
-  attackDamage: 10
-  attackInterval: 5
-  attackRange: 7
+  damageInterval: 1.5

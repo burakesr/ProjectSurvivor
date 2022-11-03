@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7206117765050235996}
   - component: {fileID: 6608745037963365993}
   - component: {fileID: 2562867834995825595}
-  - component: {fileID: 523459134103257186}
+  - component: {fileID: -8853627013373622436}
   m_Layer: 7
   m_Name: Guardian
   m_TagString: Untagged
@@ -43,6 +43,7 @@ Transform:
   - {fileID: 1770315105836476320}
   - {fileID: 491422044845517661}
   - {fileID: 8779855704531730113}
+  - {fileID: 5742578263097571411}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -142,7 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab362f8877ba334a80d90ce68115a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 0
 --- !u!114 &2675489847332580717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectUIHolder: {fileID: 544981302744561574}
   currentActiveEffects: []
---- !u!114 &523459134103257186
+--- !u!114 &-8853627013373622436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,20 +213,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1110979910593617876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 239054b4497bae04f8c3e84703465fdc, type: 3}
+  m_Script: {fileID: 11500000, guid: cb99c6c07877e534da963279315f377b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: e4093cd3158aa03449c1690367ef154d, type: 2}
   aimPoint: {fileID: 491422044845517661}
   damagePopupSpawnTransform: {fileID: 1280732360062487974}
-  currentState: 0
-  waitBeforeAttackAnim: 0.2
-  waitAfterAttackAnim: 1
-  attackTrigger: {fileID: 0}
-  rotateTowardsTargetSpeed: 20
-  m_rotationDirection: 0
-  canRotateWhileAttacking: 0
-  chaseWaitTime: 0.3
+  leftFootsDustEffects: []
+  rightFootsDustEffects: []
 --- !u!1 &2796004785622784041
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +726,96 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e430f26ec16cf45ba4ff8e89a8eb39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &437960237
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1110979910593617875}
+    m_Modifications:
+    - target: {fileID: 5742578262661776993, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_Name
+      value: FakeShadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.9369
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.9369
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.9369
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.264
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5c677e354d39c3a4e956475c681ed834, type: 3}
+--- !u!4 &5742578263097571411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5742578262661777022, guid: 5c677e354d39c3a4e956475c681ed834,
+    type: 3}
+  m_PrefabInstance: {fileID: 437960237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9102594273549850922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -792,6 +876,11 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 71177ca7a3f5f564fbf20503883b6c1b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1750197354950549132, guid: 71177ca7a3f5f564fbf20503883b6c1b,
+        type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1750197354950549132, guid: 71177ca7a3f5f564fbf20503883b6c1b,

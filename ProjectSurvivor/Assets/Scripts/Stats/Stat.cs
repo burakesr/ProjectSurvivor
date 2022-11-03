@@ -10,6 +10,5 @@ public class Stat
     public virtual void Upgrade(int amount) 
     {
         value += amount;
-        Debug.Log(value);
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.86445636, g: 0.7635534, b: 0.54355395, a: 1}
+  m_IndirectSpecularColor: {r: 0.6889449, g: 0.29220134, b: 0.17016156, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000004, guid: d89b0c562f31eb24f95f8f285a62d98f,
+  m_LightingDataAsset: {fileID: 112000002, guid: ee5b618ab2f4aa643a0d793597f6a36d,
     type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
@@ -1362,9 +1362,6 @@ MonoBehaviour:
   - prefab: {fileID: 7099243238633297939, guid: 944295916e50cbd499425865a202d4a5,
       type: 3}
     size: 200
-  - prefab: {fileID: 5366796695608864790, guid: 9691951b5de8e9046929b4d3e5425289,
-      type: 3}
-    size: 300
   - prefab: {fileID: 271752104730745929, guid: cb9be2173aaa35e4189b8c2b53108586, type: 3}
     size: 20
   - prefab: {fileID: 6505740468078402049, guid: 3976b343f785cd343aaa54f2801fb3fb,
@@ -1400,6 +1397,9 @@ MonoBehaviour:
       type: 3}
     size: 50
   - prefab: {fileID: 6787636508211145607, guid: ef9865bcc1cd11942be09bb12c272c5c,
+      type: 3}
+    size: 50
+  - prefab: {fileID: 3413197117756789376, guid: 8792ec33d0b54fa4db61f22388654a63,
       type: 3}
     size: 50
 --- !u!4 &725502488
@@ -4870,12 +4870,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7855932470911705530}
   m_Layer: 0
-  m_Name: GameplayMenu
+  m_Name: GameplayScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7855932470911705530
 RectTransform:
   m_ObjectHideFlags: 0

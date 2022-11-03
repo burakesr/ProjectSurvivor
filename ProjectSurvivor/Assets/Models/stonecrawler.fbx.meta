@@ -21,6 +21,18 @@ ModelImporter:
   - first:
       74: 4791090574797848658
     second: Armature.001|MeleeAttack02
+  - first:
+      74: -5155335545508488224
+    second: Armature.001|WalkNew (1)
+  - first:
+      74: -3100369314251171874
+    second: Idle
+  - first:
+      74: -7145959970697910567
+    second: _Default
+  - first:
+      74: 4961340399900883809
+    second: Armature.001|CrawlerWalk
   externalObjects: {}
   materials:
     materialImportMode: 0
@@ -51,8 +63,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature.001|Idle
-      takeName: Armature.001|Idle
+      name: Idle
+      takeName: Idle
       internalID: 0
       firstFrame: 0
       lastFrame: 39
@@ -80,8 +92,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.001|WalkNew
-      takeName: Armature.001|WalkNew
+      name: Armature.001|Walk (1)
+      takeName: Armature.001|Walk
       internalID: 0
       firstFrame: 0
       lastFrame: 30
@@ -109,11 +121,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.001|MeleeAttack01
-      takeName: Armature.001|MeleeAttack01
+      name: Armature.001|Walk
+      takeName: Armature.001|Walk
       internalID: 0
       firstFrame: 0
-      lastFrame: 59
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -132,31 +144,46 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.17021278
-        functionName: OnAttackAnimStart
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.65957445
-        functionName: OnAttackAnimEnd
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.001|MeleeAttack02
-      takeName: Armature.001|MeleeAttack02
+      name: _Default
+      takeName: _Default
       internalID: 0
       firstFrame: 0
-      lastFrame: 63
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature.001|CrawlerWalk
+      takeName: Armature.001|CrawlerWalk
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

@@ -20,7 +20,9 @@ public class StatsManager : SingletonMonoBehaviour<StatsManager>
 
     private void Start()
     {
-        //CreateStats();
+        if (GameManager.Instance.isTestBuild){
+            CreateStats();
+        }
     }
 
     private void OnEnable() {

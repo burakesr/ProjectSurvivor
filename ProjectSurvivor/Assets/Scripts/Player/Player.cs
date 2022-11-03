@@ -58,8 +58,9 @@ public class Player : MonoBehaviour
     private void Update() {
         _recoveryTimer -= Time.deltaTime;
 
-        if (_recoveryTimer < StatsManager.Instance.GetRecoveryStat.recoveryTime){
+        if (_recoveryTimer < 0){
             StatsManager.Instance.GetRecoveryStat.Action(health);
+            _recoveryTimer = StatsManager.Instance.GetRecoveryStat.recoveryTime;
         }
     }
 }

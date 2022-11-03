@@ -43,8 +43,8 @@ public class AIMovementControl : MonoBehaviour
 
         Vector3 playerPos = m_player.transform.position;
 
-        //Vector3 targetVelocity = m_player.GetRigidbody.velocity;
-        //Vector3 predictedPos = HelperUtilities.GetPredictedPosition(m_player.transform.position, transform.position, targetVelocity, m_agent.velocity.magnitude);
+        Vector3 targetVelocity = m_player.GetRigidbody.velocity;
+        Vector3 predictedPos = HelperUtilities.GetPredictedPosition(m_player.transform.position, transform.position, targetVelocity, m_agent.velocity.magnitude);
 
         if (m_player && m_agent.enabled)
         {

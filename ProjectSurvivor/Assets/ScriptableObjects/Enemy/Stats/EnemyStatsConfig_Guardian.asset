@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: EnemyStatsConfig_Guardian
   m_EditorClassIdentifier: 
   enemyName: Guardian
+  icon: {fileID: 0}
   speed: 2
   angularSpeed: 720
   acceleration: 50
-  stoppingDistance: 1
+  stoppingDistance: 0
   autoBraking: 1
   maxHealth: 150
   contactDamage: 5
-  attackDamage: 15
-  attackInterval: 5
-  attackRange: 3
+  damageInterval: 1.5

@@ -24,7 +24,5 @@ public class EnemyStatsConfigSO : ScriptableObject
     [Space(10)]
     [Header("DAMAGE")]
     public int contactDamage = 5;
-    public int attackDamage = 10;
-    public float attackInterval = 2f;
-    public float attackRange = 0.25f;
+    public float damageInterval = 1.5f;
 }

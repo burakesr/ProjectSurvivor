@@ -46,7 +46,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         base.Awake();
 
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
 
         if (isTestBuild)
         {

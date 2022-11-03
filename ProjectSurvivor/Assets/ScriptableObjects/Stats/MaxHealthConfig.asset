@@ -15,5 +15,5 @@ MonoBehaviour:
   statName: Max Health
   statIcon: {fileID: 0}
   statType: 1
-  baseValue: 100
+  baseValue: 200
   capValue: 10000
