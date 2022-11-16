@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class ProjectileBullet : ProjectileBase
 {
-    [SerializeField] 
+    [SerializeField]
     private bool disableOnContact = false;
     [SerializeField]
     private float lifeTime = 3f;
+    [SerializeField]
+    private float spawnHeight = 0.3f;
 
     private float timer;
 
@@ -21,7 +23,7 @@ public class ProjectileBullet : ProjectileBase
         {
             DisableProjectile();
         }
-        transform.position += p_moveDirection * speed * Time.deltaTime;
+        transform.position += transform.forward * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,6 +39,14 @@ public class ProjectileBullet : ProjectileBase
     public override void Fire(Vector3 start, Vector3 end)
     {
         p_moveDirection = (end - start).normalized;
-        transform.rotation = Quaternion.LookRotation(p_moveDirection);
+        //transform.LookAt(new Vector3(p_moveDirection.x, transform.position.y, p_moveDirection.z));
+        
+        Quaternion lookRotation = Quaternion.LookRotation(p_moveDirection);
+        transform.rotation = lookRotation;
+
+        transform.position += Vector3.up * spawnHeight;
+
+        // lookRotation = Quaternion.Euler(0, lookRotation.y, lookRotation.z);
+        // transform.Rotate(lookRotation.eulerAngles, Space.World);
     }
 }

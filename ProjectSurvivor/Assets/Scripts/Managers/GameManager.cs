@@ -27,7 +27,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private bool m_isGamePaused;
 
     public PlayerStats PlayerStats => playerStats;
-    public Player PlayerPrefab{
+
+    public Player PlayerPrefab
+    {
         get
         {
             return playerPrefab;
@@ -45,13 +47,18 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     protected override void Awake()
     {
         base.Awake();
-
-        Application.targetFrameRate = 60;
-
+        
         if (isTestBuild)
         {
             InitialisePlayer();
         }
+    }
+
+    private void Start() 
+    {
+    // #if UNITY_ANDROID
+    //     Application.targetFrameRate = 60;
+    // #endif
     }
 
     private void Update()

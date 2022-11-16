@@ -17,50 +17,69 @@ public class Player : MonoBehaviour
     [Header("GENERAL")]
     public CharacterConfigSO CharacterConfig;
 
-    public Rigidbody GetRigidbody => rb;
-    public AbilityManager GetAbilityManager => abilityManager;
-    public UpgradesManager GetUpgradesManager => upgradesManager;
-    public PlayerInputControl GetInputControl => input;
-    public Animator GetAnimator => animator;
-    public AnimatorController GetAnimationControl => animationControl;
-    public PlayerMovementControl GetMovementControl => movementControl;
-    public LevelManager GetLevelManager => levelManager;
-    public GetNearestEnemyToThePlayer GetNearestEnemyToThePlayer => nearestEnemyToThePlayer;
-    public Health GetHealth => health;
+    public Rigidbody GetRigidbody => _rb;
+    public AbilityManager GetAbilityManager => _abilityManager;
+    public UpgradesManager GetUpgradesManager => _upgradesManager;
+    public PlayerInputControl GetInputControl => _input;
+    public Animator GetAnimator => _animator;
+    public AnimatorController GetAnimationControl => _animationControl;
+    public PlayerMovementControl GetMovementControl => _movementControl;
+    public LevelManager GetLevelManager => _levelManager;
+    public GetNearestEnemyToThePlayer GetNearestEnemyToThePlayer => _nearestEnemyToThePlayer;
+    public Health GetHealth => _health;
 
-    private Rigidbody rb;
-    private AbilityManager abilityManager;
-    private PlayerInputControl input;
-    private Animator animator;
-    private AnimatorController animationControl;
-    private PlayerMovementControl movementControl;
-    private UpgradesManager upgradesManager;
-    private LevelManager levelManager;
-    private Health health;
-    private GetNearestEnemyToThePlayer nearestEnemyToThePlayer;
-
+    private Rigidbody _rb;
+    private AbilityManager _abilityManager;
+    private PlayerInputControl _input;
+    private Animator _animator;
+    private AnimatorController _animationControl;
+    private PlayerMovementControl _movementControl;
+    private UpgradesManager _upgradesManager;
+    private LevelManager _levelManager;
+    private Health _health;
+    private GetNearestEnemyToThePlayer _nearestEnemyToThePlayer;
+    private HitFlashEffect _hitFlashEffect;
+    
     private float _recoveryTimer;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
-        animationControl = GetComponent<AnimatorController>();
-        movementControl = GetComponent<PlayerMovementControl>();
-        input = GetComponent<PlayerInputControl>();
-        abilityManager = GetComponent<AbilityManager>();
-        upgradesManager = GetComponent<UpgradesManager>();
-        levelManager = GetComponent<LevelManager>();
-        health = GetComponent<Health>();
-        nearestEnemyToThePlayer = GetComponent<GetNearestEnemyToThePlayer>();
+        _rb = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
+        _animationControl = GetComponent<AnimatorController>();
+        _movementControl = GetComponent<PlayerMovementControl>();
+        _input = GetComponent<PlayerInputControl>();
+        _abilityManager = GetComponent<AbilityManager>();
+        _upgradesManager = GetComponent<UpgradesManager>();
+        _levelManager = GetComponent<LevelManager>();
+        _health = GetComponent<Health>();
+        _nearestEnemyToThePlayer = GetComponent<GetNearestEnemyToThePlayer>();
+        _hitFlashEffect = GetComponent<HitFlashEffect>();
     }
 
-    private void Update() {
+    private void OnEnable() 
+    {
+        _health.OnTakeDamage += TakeDamage;
+    }
+
+    private void OnDisable() 
+    {
+        _health.OnTakeDamage += TakeDamage;
+    }
+
+    private void Update() 
+    {
         _recoveryTimer -= Time.deltaTime;
 
         if (_recoveryTimer < 0){
-            StatsManager.Instance.GetRecoveryStat.Action(health);
+            StatsManager.Instance.GetRecoveryStat.Action(_health);
             _recoveryTimer = StatsManager.Instance.GetRecoveryStat.recoveryTime;
         }
+    }
+
+    private void TakeDamage(int amount, bool isCritical, bool isDamageOverTime)
+    {
+        StopCoroutine(_hitFlashEffect.FlashRoutine());
+        StartCoroutine(_hitFlashEffect.FlashRoutine());
     }
 }

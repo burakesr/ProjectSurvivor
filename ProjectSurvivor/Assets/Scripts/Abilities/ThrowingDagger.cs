@@ -30,6 +30,7 @@ public class ThrowingDagger : AbilityBase
             if (targets[i] != null)
             {
                 projectile.Fire(transform.position, targets[i].position);
+                projectile.transform.rotation = Quaternion.Euler(0f, projectile.transform.eulerAngles.y, 0);
             }
             else
             {

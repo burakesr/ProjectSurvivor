@@ -162,11 +162,11 @@ MonoBehaviour:
   damageText: {fileID: 2246546838746270393}
   lifeTime: 1
   normalDamageTextColor: {r: 1, g: 1, b: 1, a: 1}
-  normalDamageTextFontSize: 45
-  criticalDamageTextColor: {r: 0.12941174, g: 0.17962943, b: 0.78431374, a: 0.9843137}
-  criticalDamageTextFontSize: 58
-  damageOvertimeTextColor: {r: 1, g: 1, b: 1, a: 1}
-  damageOvertimeextFontSize: 38
+  normalDamageTextFontSize: 30
+  criticalDamageTextColor: {r: 0.9622642, g: 0.24655513, b: 0.11347453, a: 0.9843137}
+  criticalDamageTextFontSize: 40
+  damageOvertimeTextColor: {r: 1, g: 0.58425367, b: 0.051886797, a: 1}
+  damageOvertimeextFontSize: 20
   moveVector: {x: 0, y: 1, z: 0}
   moveDuration: 1
   scaleDuration: 2

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 7484439201918923601}
   - component: {fileID: 6370815258843365732}
   - component: {fileID: -6895443592284564298}
+  - component: {fileID: -6156021505240800075}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -140,7 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab362f8877ba334a80d90ce68115a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 0
 --- !u!114 &-6413570112867147168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +194,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectUIHolder: {fileID: 310605140371470507}
   currentActiveEffects: []
+--- !u!114 &-6156021505240800075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915825523384832217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb99c6c07877e534da963279315f377b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  aimPoint: {fileID: 0}
+  damagePopupSpawnTransform: {fileID: 0}
+  secondContactDustEffect: []
+  firstContactDustEffects: []
 --- !u!1 &2671254327163049764
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +438,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74d8780cdcf78a049adbc02cb557c5a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 260cc495380d2e04a86fcfe724e585b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &8970843401429133221 stripped

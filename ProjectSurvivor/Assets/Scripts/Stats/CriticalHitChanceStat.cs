@@ -6,9 +6,13 @@ public class CriticalHitChanceStat : Stat {
         value = statConfigure.baseValue;
     }
 
-    public bool IsHitCritical(){
+    public bool IsHitCritical()
+    {
         int random = Random.Range(0, 100);
-        if (random >= value){
+
+        Debug.Log(random + "   " + value);
+
+        if (value >= random){
             return true;
         }
         return false;
